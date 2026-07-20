@@ -73,7 +73,7 @@ CATEGORY_TERMS = {
 ###      LLM Model Configuration     ###
 #======================================#
 
-token = "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"
+token = "[TOKEN]"
 
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 login(token = token)
