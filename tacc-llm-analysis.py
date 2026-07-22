@@ -23,10 +23,9 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 STATE = "Texas"
 
+# Define categories and their corresponding terms for analysis
 CATEGORIES = [
     "total number of drug or alcohol terms mentioned",
-    "total number of disciplinary terms mentioned",
-    "total number of health or treatment terms mentioned",
     "number of times suspension or synonyms are mentioned",
     "number of times expulsion or synonyms is mentioned",
     "number of time transfer or referral to disciplinary alternative school is mentioned",
@@ -48,32 +47,35 @@ CATEGORIES = [
 
 CATEGORY_TERMS = {
     "total number of drug or alcohol terms mentioned": ["drug", "alcohol", "substance", "marijuana", "cocaine", "opioid", "tobacco", "vape"],
-    "total number of disciplinary terms mentioned": ["disciplinary", "rule violation", "code of conduct"],
-    "total number of health or treatment terms mentioned": ["mental health", "therapy", "counselor", "psychologist", "school nurse", "sick"],
     "number of times suspension or synonyms are mentioned": ["suspension", "in-school suspension", "temporary removal"],
     "number of times expulsion or synonyms is mentioned": ["expulsion", "permanent removal"],
     "number of time transfer or referral to disciplinary alternative school is mentioned": ["transfer", "alternative school", "disciplinary placement"],
     "number of times transfer or referral to juvenile justice program is mentioned": ["juvenile justice", "court referral", "probation"],
     "number of times arrest or synonyms are mentioned": ["arrest", "police action", "detention by authorities"],
-    "number of times drug sniffing dogs or other drug screening procedures are mentioned": ["drug dog", "drug screening", "random drug test", "Sniffing dog", "Sniffer dog"],
+    "number of times drug sniffing dogs or other drug screening procedures are mentioned": 
+    ["drug dog", "drug screening", "random drug test", "Sniffing dog", "Sniffer dog"],
     "number of times police or school resource officers are mentioned": ["school resource officer", "SRO", "police presence"],
-    "number of times any other terms are mentioned that relate to disciplinary approaches to student drug and alcohol use": ["disciplinary approach", "policy enforcement", "student conduct"],
+    "number of times any other terms are mentioned that relate to disciplinary approaches to student drug and alcohol use": 
+    ["disciplinary approach", "policy enforcement", "student conduct", "disciplinary", "rule violation", "code of conduct"],
     "number of times transfer or referral to treatment programs are mentioned": ["treatment program", "rehabilitation", "substance program"],
     "number of times transfer or referral to recovery schools are mentioned": ["recovery school", "alternative education", "substance recovery school"],
     "number of times school based health centers or synonyms are mentioned": ["school health center", "nurse office", "clinic"],
-    "number of times transfer or referral to mental health clinics or other off campus health facilities are mentioned": ["mental health clinic", "therapy center", "counseling center", "rehab"],
+    "number of times transfer or referral to mental health clinics or other off campus health facilities are mentioned": 
+    ["mental health clinic", "therapy center", "counseling center", "rehab"],
     "number of times trauma-informed care or synonyms are mentioned": ["trauma-informed", "supportive care", "emotional support"],
     "number of times restorative justice approaches or synonyms are mentioned": ["restorative justice", "mediation", "conflict resolution"],
     "number of times drug and alcohol use prevention programs are mentioned": ["prevention program", "education program", "awareness program"],
-    "number of times health-services staff such as school nurses, social workers, psychologists, or substance use counselors are mentioned": ["nurse", "social worker", "psychologist", "counselor", "substance use counselor", "addiction therapist"],
-    "number of times any other terms are mentioned that relate to a health-oriented approach to student drug and alcohol use": ["health approach", "wellness program", "support services"]
+    "number of times health-services staff such as school nurses, social workers, psychologists, or substance use counselors are mentioned": 
+    ["nurse", "social worker", "psychologist", "counselor", "substance use counselor", "addiction therapist"],
+    "number of times any other terms are mentioned that relate to a health-oriented approach to student drug and alcohol use": 
+    ["health approach", "wellness program", "support services", "mental health", "therapy", "counselor", "psychologist", "school nurse", "sick"]
 }
 
 #======================================#
 ###      LLM Model Configuration     ###
 #======================================#
 
-token = "[TOKEN]"
+token = "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"
 
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 login(token = token)
