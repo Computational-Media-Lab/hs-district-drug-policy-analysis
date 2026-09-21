@@ -161,6 +161,7 @@ def extract_pdf_text(pdf_path):
 
     return clean_sentences
 
+
 # Categorize a line of text using a language model
 def categorize_line_with_llm(line, category_terms, deepseek = True, llama = False, mistral = False, other = ''):
     prompt = f"""
@@ -196,6 +197,7 @@ def categorize_line_with_llm(line, category_terms, deepseek = True, llama = Fals
 
     return valid_categories
 
+
 # Process each school district
 def process_district(district_path, district_name, deepseek = True, llama = False, mistral = False, other = ''):
     pdf_files = [os.path.join(root, f) for root, _, files in os.walk(district_path)
@@ -217,13 +219,22 @@ def process_district(district_path, district_name, deepseek = True, llama = Fals
     with ThreadPoolExecutor() as executor:
         texts_by_file = list(executor.map(extract_pdf_text, pdf_files))
 
+
+    # files to exclude
+    EXCLUDE_FILE_NAMES = ["superintendent", "employment", "nonrenewal", "employee", "charter",
+                      "attendance", "reporting", "acquisition", "officer", "building",
+                      "equipment", "technology", "instructional", "special", "board",
+                      "planning", "leaves", "grievances", "vehicle", "contract", "staff", "government", "community"]
+
     # Pair each pre-cleaned sentence with its corresponding source file
     all_sentences = []
     for pdf_path, clean_sentences in zip(pdf_files, texts_by_file):
         filename = os.path.basename(pdf_path)
-        for s in clean_sentences:
-            # No need to tokenise or clean again; extract_pdf_text already handled it
-            all_sentences.append((filename, s))
+
+        if not any(excluded.lower() in filename.lower() for excluded in EXCLUDE_FILE_NAMES):
+        
+            for s in clean_sentences:
+                all_sentences.append((filename, s.strip()))
 
     # Extract just the text strings for embedding
     just_sentences = [s[1] for s in all_sentences]
@@ -309,7 +320,7 @@ for district_name in districts_to_process:
         print(f"❌ District folder not found: {district_path}. Skipping...")
         continue
     print(f"📂 Processing {district_name}...")
-    process_district(district_path, district_name, deepseek = True, llama = False, mistral = False, other = '')
+    process_district(district_path, district_name, deepseek = False, llama = False, mistral = True, other = '')
     print(f"✅ Completed processing {district_name}.\n")
 
 print(f"🎉 Finished processing all districts. Output saved to: {OUTPUT_DIR}")
