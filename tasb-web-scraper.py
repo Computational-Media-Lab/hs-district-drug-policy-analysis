@@ -231,9 +231,7 @@ class TASBPolicyScraper:
 
         try:
             for district, df in district_data.items():
-                districts_omit = ['Austin ISD', 'Amarillo ISD', 'Clear Creek ISD', 'Huffman ISD', 
-                                'La Feria ISD', 'Longview ISD', 'San Isidro ISD', 'Terrell ISD', 
-                                'Libery-Eylau ISD', 'Fabens ISD']
+                districts_omit = ['districts-to-omit']
 
                 if district in districts_omit:
                     continue
