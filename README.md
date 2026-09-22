@@ -2,6 +2,8 @@
 
 Description: Using LLMs to classify Texas ISDs policies of student substance use on a spectrum
 
+Authors: Anthony Yang, Maggie Ma, Dhiraj Murthy, Karen Johnson, Kathleen Sneed, Spenser Dill
+
 ## Objective
 
 Construct a standardized, quantitative index evaluating official policy documentation across 12 Texas ISDs.
